@@ -1,0 +1,3 @@
+{"ts":1346389788964,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1346389816682,"patch":[[{"diffs":[[1,"print \"Hello\""]],"start1":0,"start2":0,"length1":0,"length2":13}]],"length":13,"saved":false}
+{"ts":1346389838592,"patch":[[{"diffs":[[-1,"print \"Hello\""],[1,"from wsgiref.simple_server import make_server, demo_app\r\n\r\nhttpd = make_server('', 8000, demo_app)\r\nprint \"Serving HTTP on port 8000...\"\r\n\r\n# Respond to requests until process is killed\r\nhttpd.serve_forever()\r\n\r\n# Alternative: serve one request, then exit\r\nhttpd.handle_request()\r\n"]],"start1":0,"start2":0,"length1":13,"length2":281}]],"length":281,"saved":false}
