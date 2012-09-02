@@ -5,28 +5,39 @@ from werkzeug.debug import DebuggedApplication
 import os
 from flask import render_template
 from jinja2 import Environment
-#from jinja2_hamlpy import HamlPyExtension
+from jinja2_hamlpy import HamlPyExtension
 from flask import Flask, render_template
 from werkzeug import ImmutableDict
 from jinja2 import nodes
 from jinja2.ext import Extension
-from haml_stuff import HamlPyExtension
 
 HOST=os.environ['IP']
 PORT=int(os.environ['PORT'])
 
 from flask import Flask
+from flask import request, redirect, url_for
+
 app = Flask(__name__)
 app.jinja_env.add_extension(HamlPyExtension)
 app.debug = True
 
+data = list()
+
 @app.route("/")
 def index():
-    return render_template('layout.haml', title="Geroge")
+    return render_template('layout.haml', title="Geroge", data=data)
 
-@app.route('/new', methods=['POST'])
+@app.route('/new', methods=['POST','GET'])
 def new():
-    return "new"
+    if request.method == 'GET':
+        return redirect(url_for('index'))
+    entry = {
+        'url':request.form['url'],
+        'request':request.form['request'],
+        'response':request.form['response'],
+        }
+    data.append(entry)
+    return redirect(url_for('index'))
 
 @app.route('/user/<username>')
 def show_user_profile(username):
