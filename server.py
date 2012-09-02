@@ -3,17 +3,30 @@ from wsgiref.simple_server import make_server
 from werkzeug.wrappers import Request, Response
 from werkzeug.debug import DebuggedApplication
 import os
+from flask import render_template
+from jinja2 import Environment
+#from jinja2_hamlpy import HamlPyExtension
+from flask import Flask, render_template
+from werkzeug import ImmutableDict
+from jinja2 import nodes
+from jinja2.ext import Extension
+from haml_stuff import HamlPyExtension
 
 HOST=os.environ['IP']
 PORT=int(os.environ['PORT'])
 
 from flask import Flask
 app = Flask(__name__)
+app.jinja_env.add_extension(HamlPyExtension)
 app.debug = True
 
 @app.route("/")
-def hello():
-    return "Hello World 2!"
+def index():
+    return render_template('layout.haml', title="Geroge")
+
+@app.route('/new', methods=['POST'])
+def new():
+    return "new"
 
 @app.route('/user/<username>')
 def show_user_profile(username):

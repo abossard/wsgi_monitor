@@ -1,0 +1,18 @@
+!!! 5
+%html
+    %head
+        %script{'type': 'text/css', 'charset': 'utf-8',
+                'href': '/static/style.css'}
+    %body
+        %h1
+            = title
+        %form{'action':'POST', value:'Test', checked: None}
+            %formset
+                %legend Test Post New
+                %label Url
+                    %input
+                %label Request Data
+                    %input
+                %label Reponse Data
+                    %input
+                %button Submit
